@@ -64,9 +64,9 @@
         
             <li><a class="toctree-l3" href="#installing-the-server">Installing the Server</a></li>
         
-            <li><a class="toctree-l3" href="#installing-the-client">Installing the Client</a></li>
-        
             <li><a class="toctree-l3" href="#installing-the-viewer">Installing the Viewer</a></li>
+        
+            <li><a class="toctree-l3" href="#installing-the-client">Installing the Client</a></li>
         
         </ul>
     
@@ -112,12 +112,11 @@
             <div class="section">
               
                 <h1 id="getting-started">Getting Started</h1>
-<p>This guide will explain the process of installing the Sandpolis.</p>
 <h2 id="installing-the-server">Installing the Server</h2>
-<p>If you already have a server or are using a cloud server, you can skip this step.</p>
+<p>There are several different ways to install the server. The universal installer will work on just about every system, but a distribution package may be a more convenient option.</p>
 <h3 id="with-the-universal-installer-gui">With the universal installer GUI</h3>
 <ul>
-<li><a href="https://sandpolis.com/download" target="_blank">Download</a> the server installer for your operating system. We recommend running the server on a Linux machine because it's convenient to manage the server process with <code>systemd</code>, but it works on Windows and macOS as well.</li>
+<li><a href="https://sandpolis.com/download" target="_blank">Download</a> the universal installer for your operating system. We recommend running the server on a Linux machine because it's convenient to manage the server process with <code>systemd</code>, but it works on Windows and macOS as well.</li>
 <li>Select "server" from the available components and press "Install".</li>
 </ul>
 <h3 id="with-a-distribution-package">With a distribution package</h3>
@@ -131,7 +130,8 @@ wget https://aur.archlinux.org/cgit/aur.git/snapshot/sandpolis-git.tar.gz
 </code></pre>
 
 <p>Install with <code>makepkg</code>:</p>
-<pre><code class="sh">cd sandpolis
+<pre><code class="sh">tar xf sandpolis.tar.gz
+cd sandpolis
 makepkg -sif
 </code></pre>
 
@@ -140,21 +140,30 @@ makepkg -sif
 sudo systemctl enable sandpolisd.service
 </code></pre>
 
+<h3 id="with-docker">With Docker</h3>
+<p>The server can also be run as a Docker container with the following command:</p>
+<pre><code class="sh">sudo docker run --restart unless-stopped sandpolis/sandpolis-server:latest
+</code></pre>
+
+<p>If your container isn't starting on boot, make sure the Docker daemon is configured to start automatically:</p>
+<pre><code>sudo systemctl enable docker
+</code></pre>
+
+<h2 id="installing-the-viewer">Installing the Viewer</h2>
+<p>There are several official viewer applications that can be used to connect to a server. Not all of them have the same capabilities, so choose the most convenient variant that meets your needs.</p>
+<h3 id="sandpolis-ios-application">Sandpolis iOS application</h3>
+<p>The Sandpolis iOS application can be installed from the App Store and supports iPhone and iPad devices running iOS 13.0 or greater. <strong>Warning:</strong> the iOS app uses Google's Firebase platform for user authentication. If you avoid Google products, use the desktop application instead.</p>
+<h4 id="create-an-account">Create an account</h4>
+<p>Your account allows you to save multiple servers for easy access and enables several features not possible with other viewer applications.</p>
+<h3 id="sandpolis-android-application">Sandpolis Android application</h3>
+<p>Coming soon...</p>
+<h3 id="sandpolis-desktop-viewer">Sandpolis Desktop Viewer</h3>
+<p>Coming soon...</p>
 <h2 id="installing-the-client">Installing the Client</h2>
 <h3 id="with-the-universal-installer-gui_1">With the universal installer GUI</h3>
 <p>If you have the Sandpolis mobile app, you can scan the QR code in the installer to automatically associate the client with the correct server.</p>
 <h3 id="generate-a-client-installer">Generate a client installer</h3>
 <p>A customized installer can be generated from the desktop viewer application that can then be used to install the client on any machine.</p>
-<h2 id="installing-the-viewer">Installing the Viewer</h2>
-<p>There are several official viewer applications that can be used to connect to a server. Not all of them have the same capabilities, so choose the most convenient variant that meets your needs.</p>
-<h3 id="sandpolis-ios-application">Sandpolis iOS application</h3>
-<p>The Sandpolis iOS application can be installed from the App Store.</p>
-<h4 id="create-an-account">Create an account</h4>
-<p>Your account allows you to save multiple servers for easy access and enables several features not possible with other viewer applications. Your account details are stored in Google's Firebase platform.</p>
-<h3 id="sandpolis-android-application">Sandpolis Android application</h3>
-<p>Coming soon...</p>
-<h3 id="sandpolis-desktop-viewer">Sandpolis Desktop Viewer</h3>
-<p>Coming soon...</p>
               
             </div>
           </div>
