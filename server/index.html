@@ -69,6 +69,12 @@
         
             <li><a class="toctree-l3" href="#geolocation-services">Geolocation Services</a></li>
         
+            <li><a class="toctree-l3" href="#permissions">Permissions</a></li>
+        
+            <li><a class="toctree-l3" href="#authentication-groups">Authentication Groups</a></li>
+        
+            <li><a class="toctree-l3" href="#generators">Generators</a></li>
+        
         </ul>
     
 
@@ -109,34 +115,39 @@
               
                 <h1 id="the-server">The Server</h1>
 <h2 id="geolocation-services">Geolocation Services</h2>
-<p>Sandpolis is able to get its location information from several sources. The server can only use one service at a time. To choose a service, set the following system properties:</p>
+<p>Sandpolis is able to get its location information from several sources, but the server can only use one service at a time. To choose a service, set the following system properties:</p>
 <table>
 <thead>
 <tr>
 <th>Property</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>server.geolocation.service</td>
-<td>The name of the geolocation service to use. Valid values are found in the table below. Defaults to <code>ip-api.com</code>.</td>
+<td><code>ip-api.com</code></td>
+<td>The name of the geolocation service to use. Valid values are found in the table below.</td>
 </tr>
 <tr>
 <td>server.geolocation.key</td>
-<td>The API key to use</td>
+<td><code>null</code></td>
+<td>The service API key</td>
 </tr>
 <tr>
 <td>server.geolocation.expiration</td>
-<td>The cache timeout in hours. Default is <code>240</code>.</td>
+<td><code>240</code></td>
+<td>The cache timeout in hours</td>
 </tr>
 </tbody>
 </table>
+<p>Sandpolis supports the following public geolocation services:</p>
 <table>
 <thead>
 <tr>
 <th>Service</th>
-<th>Additional</th>
+<th>Identifier</th>
 </tr>
 </thead>
 <tbody>
@@ -150,6 +161,126 @@
 </tr>
 </tbody>
 </table>
+<h2 id="permissions">Permissions</h2>
+<p>Since multiple viewers can connect to a particular server at the same time, it's nice to have a permissions system to restrict a user's power. In most cases, a single admin viewer is sufficient for managing Sandpolis. Some advanced use cases require multiple users, which are feasible thanks to the permissions system. </p>
+<p>The user permissions system is similar to the MySQL permissions system. Permissions are "granted" to users by the admin upon user creation. These permissions dictate what a user can do on the server. New users have no permissions by default and therefore can do essentially nothing on the server.</p>
+<h4 id="permissions-list">Permissions list</h4>
+<table>
+<thead>
+<tr>
+<th>Permission</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>server.generate</td>
+<td>Rights to use the generator</td>
+</tr>
+<tr>
+<td>server.fs.read</td>
+<td>Read access to the server's filesystem</td>
+</tr>
+<tr>
+<td>server.fs.write</td>
+<td>Write access to the server's filesystem</td>
+</tr>
+<tr>
+<td>server.users.view</td>
+<td>Right to view usernames and permissions of all other users</td>
+</tr>
+<tr>
+<td>server.users.create</td>
+<td>Right to create new users (of lesser or equal permissions)</td>
+</tr>
+<tr>
+<td>server.state.stop</td>
+<td>Right to stop the server</td>
+</tr>
+<tr>
+<td>server.state.shutdown</td>
+<td>Right to shutdown the server</td>
+</tr>
+<tr>
+<td>server.state.restart</td>
+<td>Right to restart the server</td>
+</tr>
+<tr>
+<td>server.net.view</td>
+<td>Right to open the network control panel</td>
+</tr>
+<tr>
+<td>server.net.create_listener</td>
+<td>Right to create a new listener on the server</td>
+</tr>
+<tr>
+<td>server.auth.create_group</td>
+<td>Right to create a new authentication group on the server</td>
+</tr>
+<tr>
+<td>client.fs.read</td>
+<td>Read access to the client's filesystem</td>
+</tr>
+<tr>
+<td>client.fs.write</td>
+<td>Write access to the client's filesystem</td>
+</tr>
+<tr>
+<td>client.state.shutdown</td>
+<td>Right to shutdown the client</td>
+</tr>
+<tr>
+<td>client.state.restart</td>
+<td>Right to restart the client</td>
+</tr>
+</tbody>
+</table>
+<h2 id="authentication-groups">Authentication Groups</h2>
+<p>Authentication groups solve two problems:
+- they ensure clients connect to the correct server
+- they conveniently partition clients so permissions can be easily enforced</p>
+<p>Since clients are dynamic, enforcing <code>client.*</code> permissions is more complicated than enforcing <code>server.*</code> permissions. This is because the subject of a <code>client.*</code> permission varies with context while a <code>server.*</code> permission always refers to the only server in the network.  </p>
+<h2 id="generators">Generators</h2>
+<p>Sandpolis is compatible with many different platforms and therefore needs to have a flexible approach to client installation. A <code>Generator</code> is a routine which produces some installation artifact according to a supplied configuration (<code>GenConfig</code>). This installation artifact is then used to install the Sandpolis client on a remote system.</p>
+<h4 id="1-installation-artifacts">1 Installation Artifacts</h4>
+<p>At minimum, installation artifacts contain configuration and settings for the client. Usually, installation artifacts will also contain the actual client code and be runnable on the remote system.</p>
+<h6 id="11-installers">1.1 Installers</h6>
+<p>An installer contains the full client codebase and is runnable on the remote system. Upon execution, the installer sets up the base directory according to its configuration and executes the client. If the target directory already contains an installation, the old installation is overwritten.  In an automated upgrade scenario, this operation poses no risk to data stored in the old client's database because this data would have been already flushed to the server. A manual upgrade could destroy data cached in the client database and is therefore not recommended.</p>
+<p>Advantages
+- Simple
+- Does not require Internet access during installation</p>
+<p>Disadvantages
+- File size is large
+- File transfer may be inconvenient</p>
+<p>Examples
+- Runnable Jar files (.jar, .war, .ear)
+- Windows portable executables (.exe, .msi)
+- Scripts (.sh, .rb, .py, .bat, ...)</p>
+<h6 id="12-downloaders">1.2 Downloaders</h6>
+<p>Downloaders are similar to installers except dependencies must be downloaded upon execution. This can drastically reduce the size of the resulting installation artifact. Remote dependencies must be located in a Maven repository and not downloaded from the Sandpolis server.</p>
+<p>Advantages
+- Smaller file size</p>
+<p>Disadvantages
+- Requires Internet access during installation
+- File transfer may be inconvenient</p>
+<p>Examples
+- Runnable Jar files (.jar, .war, .ear)
+- Windows portable executables (.exe, .msi)
+- Scripts (.sh, .rb, .py, .bat, ...)</p>
+<h6 id="13-tokens">1.3 Tokens</h6>
+<p>A token is an artifact which only contains the client configuration and cannot be executed by itself. When provided to a generic installer, the token allows the client to be installed on the remote system.</p>
+<p>Advantages
+- No files are transferred</p>
+<p>Disadvantages
+- More user interaction is required</p>
+<p>Examples
+- Barcodes for use on Android, IOS, etc...</p>
+<h4 id="2-generators">2 Generators</h4>
+<p>All installation artifacts are first generated on the server using a generator and then transferred to the requesting viewer (or client in the case of an automated upgrade). </p>
+<h6 id="21-generator-queue"># 2.1 Generator Queue</h6>
+<p>Since performing a generation is an infrequent task, the server maintains a simple queue of requests (generation configs) and fufills them serially. If the queue becomes full, incoming requests are dropped.</p>
+<h6 id="22-generator-configs"># 2.2 Generator Configs</h6>
+<p>A <code>GenConfig</code> specifies what type of generator should process it, any necessary options for that generator, and where to direct the resulting installation artifact. <code>GenConfigs</code> are implicitly created on the viewer from the graphical interface.</p>
               
             </div>
           </div>

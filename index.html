@@ -55,6 +55,12 @@
             
     <li class="toctree-l2"><a href="#sandpolis-official-documentation">Sandpolis Official Documentation</a></li>
     
+        <ul>
+        
+            <li><a class="toctree-l3" href="#the-basics">The Basics</a></li>
+        
+        </ul>
+    
 
     </ul>
 	    </li>
@@ -103,6 +109,21 @@
               
                 <h1 id="sandpolis-official-documentation">Sandpolis Official Documentation</h1>
 <p>This documentation explains how to <strong>install</strong>, <strong>configure</strong>, and <strong>maintain</strong> Sandpolis. It's still a work in progress; feel free to <a href="https://github.com/Subterranean-Security/docs/issues" target="_blank">drop us an issue</a>.</p>
+<h2 id="the-basics">The Basics</h2>
+<p>You may already be familiar with other remote-control utilities that allow you to monitor/manage many different computers from a single GUI. To use these tools, you typically install a <em>stub</em> or <em>agent</em> on the computers you wish to monitor and direct that stub to connect back to the main application running on your computer. While relatively simple, there are some disadvantages to this approach:</p>
+<ul>
+<li>Your computer may not always be online to accept connections</li>
+<li>Your computer may not have a stable IP address</li>
+<li>This architecture does not scale as the number of client computers increases</li>
+</ul>
+<p>To address these problems, Sandpolis uses a client-server-viewer (CSV) architecture. Rather than connecting clients directly to an application on your computer, a central server mediates all interactions between you and your client systems.</p>
+<p>With CSV, clients and viewers can come and go without affecting the rest of the network. This means that:</p>
+<ul>
+<li>background or scheduled tasks can continue after a user logs out</li>
+<li>users are not restricted to a particular user interface</li>
+<li>messages between clients and viewers are routed through the server first. (For high-volume messages like remote desktop streams or file transfer streams, the server automatically coordinates a direct connection between the two nodes if possible).</li>
+<li>users don't have to adjust their firewalls or port-forwarding rules</li>
+</ul>
               
             </div>
           </div>
@@ -151,5 +172,5 @@
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2019-11-17 22:07:10
+Build Date UTC : 2019-11-27 04:28:58
 -->
