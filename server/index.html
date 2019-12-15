@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>The Server - Sandpolis 5.1.1</title>
+  <title>The Server - Sandpolis 5.1.2</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -36,7 +36,7 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href=".." class="icon icon-home"> Sandpolis 5.1.1</a>
+        <a href=".." class="icon icon-home"> Sandpolis 5.1.2</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
@@ -91,7 +91,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="..">Sandpolis 5.1.1</a>
+        <a href="..">Sandpolis 5.1.2</a>
       </nav>
 
       
@@ -236,50 +236,70 @@
 </tbody>
 </table>
 <h2 id="authentication-groups">Authentication Groups</h2>
-<p>Authentication groups solve two problems:
-- they ensure clients connect to the correct server
-- they conveniently partition clients so permissions can be easily enforced</p>
+<p>Authentication groups solve two problems:</p>
+<ul>
+<li>they ensure clients connect to the correct server</li>
+<li>they conveniently partition clients so permissions can be easily enforced</li>
+</ul>
 <p>Since clients are dynamic, enforcing <code>client.*</code> permissions is more complicated than enforcing <code>server.*</code> permissions. This is because the subject of a <code>client.*</code> permission varies with context while a <code>server.*</code> permission always refers to the only server in the network.  </p>
 <h2 id="generators">Generators</h2>
 <p>Sandpolis is compatible with many different platforms and therefore needs to have a flexible approach to client installation. A <code>Generator</code> is a routine which produces some installation artifact according to a supplied configuration (<code>GenConfig</code>). This installation artifact is then used to install the Sandpolis client on a remote system.</p>
-<h4 id="1-installation-artifacts">1 Installation Artifacts</h4>
+<h3 id="installation-artifacts">Installation Artifacts</h3>
 <p>At minimum, installation artifacts contain configuration and settings for the client. Usually, installation artifacts will also contain the actual client code and be runnable on the remote system.</p>
-<h6 id="11-installers">1.1 Installers</h6>
+<h4 id="installers">Installers</h4>
 <p>An installer contains the full client codebase and is runnable on the remote system. Upon execution, the installer sets up the base directory according to its configuration and executes the client. If the target directory already contains an installation, the old installation is overwritten.  In an automated upgrade scenario, this operation poses no risk to data stored in the old client's database because this data would have been already flushed to the server. A manual upgrade could destroy data cached in the client database and is therefore not recommended.</p>
-<p>Advantages
-- Simple
-- Does not require Internet access during installation</p>
-<p>Disadvantages
-- File size is large
-- File transfer may be inconvenient</p>
-<p>Examples
-- Runnable Jar files (.jar, .war, .ear)
-- Windows portable executables (.exe, .msi)
-- Scripts (.sh, .rb, .py, .bat, ...)</p>
-<h6 id="12-downloaders">1.2 Downloaders</h6>
+<h5 id="advantages">Advantages</h5>
+<ul>
+<li>Simple</li>
+<li>Does not require Internet access during installation</li>
+</ul>
+<h5 id="disadvantages">Disadvantages</h5>
+<ul>
+<li>File size is large</li>
+<li>File transfer may be inconvenient</li>
+</ul>
+<h5 id="examples">Examples</h5>
+<ul>
+<li>Runnable Jar files (.jar, .war, .ear)</li>
+<li>Windows portable executables (.exe, .msi)</li>
+<li>Scripts (.sh, .rb, .py, .bat, ...)</li>
+</ul>
+<h4 id="downloaders">Downloaders</h4>
 <p>Downloaders are similar to installers except dependencies must be downloaded upon execution. This can drastically reduce the size of the resulting installation artifact. Remote dependencies must be located in a Maven repository and not downloaded from the Sandpolis server.</p>
-<p>Advantages
-- Smaller file size</p>
-<p>Disadvantages
-- Requires Internet access during installation
-- File transfer may be inconvenient</p>
-<p>Examples
-- Runnable Jar files (.jar, .war, .ear)
-- Windows portable executables (.exe, .msi)
-- Scripts (.sh, .rb, .py, .bat, ...)</p>
-<h6 id="13-tokens">1.3 Tokens</h6>
+<h5 id="advantages_1">Advantages</h5>
+<ul>
+<li>Smaller file size</li>
+</ul>
+<h5 id="disadvantages_1">Disadvantages</h5>
+<ul>
+<li>Requires Internet access during installation</li>
+<li>File transfer may be inconvenient</li>
+</ul>
+<h5 id="examples_1">Examples</h5>
+<ul>
+<li>Runnable Jar files (.jar, .war, .ear)</li>
+<li>Windows portable executables (.exe, .msi)</li>
+<li>Scripts (.sh, .rb, .py, .bat, ...)</li>
+</ul>
+<h4 id="13-tokens">1.3 Tokens</h4>
 <p>A token is an artifact which only contains the client configuration and cannot be executed by itself. When provided to a generic installer, the token allows the client to be installed on the remote system.</p>
-<p>Advantages
-- No files are transferred</p>
-<p>Disadvantages
-- More user interaction is required</p>
-<p>Examples
-- Barcodes for use on Android, IOS, etc...</p>
-<h4 id="2-generators">2 Generators</h4>
+<h5 id="advantages_2">Advantages</h5>
+<ul>
+<li>No files are transferred</li>
+</ul>
+<h5 id="disadvantages_2">Disadvantages</h5>
+<ul>
+<li>More user interaction is required</li>
+</ul>
+<h5 id="examples_2">Examples</h5>
+<ul>
+<li>Barcodes for use on Android, IOS, etc...</li>
+</ul>
+<h3 id="generators_1">Generators</h3>
 <p>All installation artifacts are first generated on the server using a generator and then transferred to the requesting viewer (or client in the case of an automated upgrade). </p>
-<h6 id="21-generator-queue"># 2.1 Generator Queue</h6>
+<h5 id="generator-queue">Generator Queue</h5>
 <p>Since performing a generation is an infrequent task, the server maintains a simple queue of requests (generation configs) and fufills them serially. If the queue becomes full, incoming requests are dropped.</p>
-<h6 id="22-generator-configs"># 2.2 Generator Configs</h6>
+<h5 id="generator-configs">Generator Configs</h5>
 <p>A <code>GenConfig</code> specifies what type of generator should process it, any necessary options for that generator, and where to direct the resulting installation artifact. <code>GenConfigs</code> are implicitly created on the viewer from the graphical interface.</p>
               
             </div>

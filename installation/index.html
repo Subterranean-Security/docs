@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Installation - Sandpolis 5.1.1</title>
+  <title>Installation - Sandpolis 5.1.2</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -36,7 +36,7 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href=".." class="icon icon-home"> Sandpolis 5.1.1</a>
+        <a href=".." class="icon icon-home"> Sandpolis 5.1.2</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
@@ -73,7 +73,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="..">Sandpolis 5.1.1</a>
+        <a href="..">Sandpolis 5.1.2</a>
       </nav>
 
       
@@ -162,6 +162,48 @@
 <h6 id="321-windows">3.2.1 Windows</h6>
 <h6 id="322-linux">3.2.2 Linux</h6>
 <h6 id="323-mac-os">3.2.3 Mac OS</h6>
+<h2 id="installer-flags">Installer Flags</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>path</td>
+<td>user.home + /.sandpolis</td>
+<td>The base installation path</td>
+</tr>
+<tr>
+<td>components</td>
+<td>null</td>
+<td>The components to install</td>
+</tr>
+<tr>
+<td>version</td>
+<td>latest</td>
+<td>The version to install</td>
+</tr>
+<tr>
+<td>ext.linux.desktop</td>
+<td>/usr/share/applications; user.home + /.local/share/applications</td>
+<td>The Linux desktop entry location</td>
+</tr>
+<tr>
+<td>ext.windows.start</td>
+<td>C:/ProgramData/Microsoft/Windows/Start Menu/Programs; user.home + /AppData/Microsoft/Windows/Start Menu/Programs</td>
+<td>The Windows start menu location</td>
+</tr>
+<tr>
+<td>ext.windows.desktop</td>
+<td>user.home + /Desktop</td>
+<td>The Windows desktop shortcut location</td>
+</tr>
+</tbody>
+</table>
               
             </div>
           </div>
