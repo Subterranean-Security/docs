@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Getting Started - Sandpolis Documentation</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Getting Started";
+    var mkdocs_page_input_path = "tutorials/getting_started.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Sandpolis Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Getting Started</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#with-the-universal-installer-gui">With the universal installer GUI</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#with-a-distribution-package">With a distribution package</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#pacman-arch-linux">Pacman (Arch Linux)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#with-docker">With Docker</a>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../client/gui/">Desktop client</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../client/terminal/">Terminal client</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Programming Reference</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../application/client/">Client</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../application/server/">Server</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../application/agent/">Agent</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../application/data_model/">Data Model</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../application/network/">Networking</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Sandpolis Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Tutorials &raquo;</li>
+        
+      
+    
+    <li>Getting Started</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="installing-the-server">Installing the Server</h2>
+<p>The first thing you need to run Sandpolis is the server.</p>
+<p>There are several different ways to install the server. The universal installer will work on just about every system, but a specialized distribution package may be a more convenient option if your system supports it.</p>
+<h3 id="with-the-universal-installer-gui">With the universal installer GUI</h3>
+<ul>
+<li><a href="https://sandpolis.com/download" target="_blank">Download</a> the universal installer for your operating system.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the server runs on any platform, it's extremely convenient to manage the server process with <code>systemctl</code> on Linux.</p>
+</div>
+<ul>
+<li>Select <strong>server</strong> from the available components and choose "install".</li>
+</ul>
+<h3 id="with-a-distribution-package">With a distribution package</h3>
+<h4 id="pacman-arch-linux">Pacman (Arch Linux)</h4>
+<p>Download either the stable or development package from the AUR:</p>
+<pre><code class="language-sh"># Stable
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/sandpolis.tar.gz
+
+# Development
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/sandpolis-git.tar.gz
+</code></pre>
+<p>Install with <code>makepkg</code>:</p>
+<pre><code class="language-sh">tar xf sandpolis.tar.gz
+cd sandpolis
+makepkg -sif
+</code></pre>
+<p>Start and optionally enable the server's <code>systemd</code> service unit:</p>
+<pre><code class="language-sh"># Start the server process
+sudo systemctl start sandpolisd.service
+
+# Configure the server to start on boot
+sudo systemctl enable sandpolisd.service
+</code></pre>
+<h3 id="with-docker">With Docker</h3>
+<p>The server can also be run as a Docker container with the following command:</p>
+<pre><code class="language-sh">sudo docker run --restart unless-stopped sandpolis/sandpolis-server:latest
+</code></pre>
+<p>If your container isn't starting on boot, ensure the Docker daemon is configured to start automatically:</p>
+<pre><code class="language-sh">sudo systemctl enable docker
+</code></pre>
+<h2 id="installing-a-client">Installing a Client</h2>
+<p>There are several official client applications that can be used to connect to a server. Not all of them have the same capabilities, so choose the variant that meets your needs.</p>
+<h3 id="sandpolis-for-ios">Sandpolis for iOS</h3>
+<p>The Sandpolis iOS application can be installed from the App Store and supports iPhone and iPad devices running iOS 13.0 or greater.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The iOS app optionally uses Google's <a href="https://firebase.google.com">Firebase platform</a> for user authentication. If you want to avoid Google's tracking, just login to your servers manually without creating an account.</p>
+</div>
+<h4 id="create-an-account">Create an account</h4>
+<p>Your account allows you to save multiple servers for easy access and enables several features not possible with other client applications.</p>
+<h3 id="sandpolis-android-application">Sandpolis Android application</h3>
+<p>Coming soon...</p>
+<h3 id="sandpolis-desktop-client">Sandpolis Desktop Client</h3>
+<p>Coming soon...</p>
+<h2 id="installing-the-agent">Installing the Agent</h2>
+<h3 id="with-the-universal-installer-gui_1">With the universal installer GUI</h3>
+<p>If you have the mobile application, you can scan the QR code in the universal installer to automatically associate the agent with the correct server.</p>
+<h3 id="generate-an-agent-installer">Generate an agent installer</h3>
+<p>The desktop client can generate customized installers that can be used to install the agent on any machine.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../client/gui/" class="btn btn-neutral float-right" title="Desktop client">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../.." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../.." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../client/gui/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
